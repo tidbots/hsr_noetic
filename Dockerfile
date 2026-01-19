@@ -156,8 +156,11 @@ RUN echo "export MESA_LOADER_DRIVER_OVERRIDE=i965" >> ~/.bashrc
 
 RUN source /opt/ros/noetic/setup.bash && \
     mkdir -p ~/catkin_ros/src && cd ~/catkin_ros/src && \
-    catkin_init_workspace && \
-    cd ~/catkin_ros && \
+    catkin_init_workspace 
+
+COPY ./sample/hsrb_samples /home/roboworks/catkin_ros/src
+RUN source /opt/ros/noetic/setup.bash && \
+    cd /home/roboworks/catkin_ros && \
     catkin_make
 
 # entrypoint
