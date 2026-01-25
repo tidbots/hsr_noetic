@@ -8,7 +8,7 @@ ROS Noetic Ninjemysをdockerから簡単に使いたい。
 ## 事前の準備
 お使いのコンピュータにNVIDIA(GPU）関連の設定,DockerとDocker composeをインストールしてください。
 
-下記の環境での動作を確認しています。
+下記のホストPC環境での動作を確認しています。
 
 - Ubuntu 22.04.3 LTS
 - Docker version 24.0.7, build afdd53b
