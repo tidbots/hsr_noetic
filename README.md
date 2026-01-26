@@ -130,7 +130,7 @@ roslaunch spawn_bottle_with_marker.launch
 ```
 以下のようにgazebo上にマーカ付きのボトルが出現したと思います。
 
-![](/fig/.png)
+![](/fig/marker_gazebo.png)
 
 2. 把持プログラムの実行
 ```
