@@ -86,23 +86,6 @@ RUN apt-get update
 RUN apt-get install -y --no-install-recommends ros-noetic-tmc-desktop-full \
     && rm -rf /var/lib/apt/lists/*
 
-
-# COPY assets/avahi-daemon.conf /etc/avahi/avahi-daemon.conf
-
-#RUN apt update \
-#  && apt install -y iputils-ping net-tools chrony 
-ARG ROBOT_NAME
-#RUN echo "server ${ROBOT_NAME}.local" >> /etc/chrony/chrony.conf
-#RUN echo "driftfile /var/lib/chrony/chrony.drift" >> /etc/chrony/chrony.conf
-#RUN echo "keyfile /etc/chrony/chrony.keys" >> /etc/chrony/chrony.conf
-#RUN echo "generatecommandkey" >> /etc/chrony/chrony.conf
-#RUN echo "log tracking measurements statistics" >> /etc/chrony/chrony.conf
-#RUN echo "logdir /var/log/chrony" >> /etc/chrony/chrony.conf
-#RUN echo "local stratum 10" >> /etc/chrony/chrony.conf
-#RUN echo "allow ${ROBOT_NAME}.local" >> /etc/chrony/chrony.conf
-#RUN echo "logchange 0.5" >> /etc/chrony/chrony.conf
-#RUN echo "initstepslew 20 ${ROBOT_NAME}.local" >> /etc/chrony/chrony.conf
-
 # Add user and group
 ARG UID
 ARG GID
@@ -158,14 +141,17 @@ RUN source /opt/ros/noetic/setup.bash && \
     mkdir -p ~/catkin_ros/src && cd ~/catkin_ros/src && \
     catkin_init_workspace 
 
-COPY ./sample/hsrb_samples /home/roboworks/catkin_ros/src
+COPY ./sample/hsrb_samples /home/$USER_NAME/catkin_ros/src
 RUN source /opt/ros/noetic/setup.bash && \
-    cd /home/roboworks/catkin_ros && \
+    cd /home/$USER_NAME/catkin_ros && \
     catkin_make
+
+COPY ./scripts /home/$USER_NAME/scripts
 
 # entrypoint
 COPY ./assets/entrypoint.sh /
 RUN sudo chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
+WORKDIR /home/$USER_NAME 
 #CMD ["bash"]
 CMD ["terminator"]
