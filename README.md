@@ -113,8 +113,8 @@ https://docs.hsr.io/hsr_develop_manual/python_interface/hsr_guide_sample.html#id
 
 サンプルを実行すると、ロボットが会場を一周して案内します。
 ```
-cd ~/roboworks/sample
-$ python3 guide_mega.py
+cd ~/roboworks/scripts
+python3 guide_mega.py
 ```
 
 ### 把持のサンプル
